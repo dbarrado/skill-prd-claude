@@ -174,7 +174,32 @@ Antes de escribir el PRD final, **resumí todo lo recopilado** en formato de lis
 
 > *"Antes de generar el PRD, acá está el resumen de lo que me dijiste. ¿Está todo bien o quieres corregir algo?"*
 
-Si el usuario aprueba (o hace correcciones menores), avanzá a la Fase 3.
+Si el usuario aprueba (o hace correcciones menores), avanzá a la Fase 2b.
+
+---
+
+### FASE 2b — Enganchar las secciones probadas (OBLIGATORIA)
+
+**Antes de escribir el PRD, cargá la skill `secciones-app`** e identificá qué secciones aplican a
+este producto según su tabla de decisión.
+
+Esa biblioteca cubre lo que casi nunca aparece en la conversación con el usuario porque **no se le
+ocurre pedirlo**: seguridad de los datos, credenciales, auditoría previa a publicar, ciclo de vida
+de estados, concurrencia, tareas programadas y verificación final. Son justamente las partes que
+salen caras cuando se descubren tarde.
+
+**Cinco de esas secciones entran siempre** que el producto guarde datos, aunque el usuario no las
+haya mencionado: seguridad de los datos, credenciales, auditoría automática, verificación final y
+memoria del proyecto.
+
+**Si la skill `secciones-app` no está disponible**, no te detengas: incluye igual, en el PRD, un
+apartado de requisitos no funcionales que cubra como mínimo la seguridad de la base (seguridad por
+fila activada en todas las tablas, acceso solo a través del servidor), el manejo de credenciales en
+archivo de entorno fuera del repositorio, y una verificación final de accesos indebidos. Y avísale
+al usuario que existe una biblioteca más completa que no tienes instalada.
+
+**No le preguntes al usuario si quiere estas secciones.** Se incorporan y se le explica por qué,
+igual que un arquitecto no pregunta si quiere columnas.
 
 ---
 
@@ -343,12 +368,15 @@ Orden de construcción sugerido:
 1. Setup: repositorio GitHub → Vercel → Supabase → variables de entorno
 2. Ejecutar schema SQL completo en Supabase SQL Editor
 3. Autenticación: login/logout + middleware de rutas protegidas + manejo de roles
+   3b. Seguridad de datos y credenciales — bloques de `secciones-app` (§4 y §5)
 4. [Funcionalidad core 1]
 5. [Funcionalidad core 2]
 6. [Funcionalidad core 3]
 7. Integraciones externas
 8. Polish: diseño responsive, manejo de errores, estados vacíos
-9. Testing en producción y ajustes finales
+9. Auditoría de seguridad y verificación de accesos indebidos — `secciones-app` (§6 y §11)
+10. Testing en producción y ajustes finales
+11. Reglas del proyecto al CLAUDE.md — `secciones-app` (§12)
 
 
 Nota final:
